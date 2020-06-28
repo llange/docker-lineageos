@@ -3,6 +3,9 @@ LABEL maintainer="jfloff@inesc-id.pt"
 
 ###################
 # This Dockerfile was based on the following Dockerfiles
+# - https://github.com/jfloff/docker-lineageos
+# - https://github.com/nwereszczak/docker-lineageos
+# - https://github.com/minz1/docker-lineageos
 # - docker-lineageos: existing unoptimized image
 #    https://github.com/AnthoDingo/docker-lineageos/blob/autobuild/Dockerfile
 #

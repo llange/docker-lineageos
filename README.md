@@ -1,3 +1,9 @@
+(!) This fork is a WiP combining elements from:
+* https://github.com/jfloff/docker-lineageos
+* https://github.com/nwereszczak/docker-lineageos
+* https://github.com/minz1/docker-lineageos
++ additional changes
+
 # docker-lineageos
 
 [![Docker Stars](https://img.shields.io/docker/stars/jfloff/lineageos.svg)][hub]
