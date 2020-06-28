@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM ubuntu:latest
 LABEL maintainer="Ludovic LANGE <llange@users.noreply.github.com>"
 
 ###################
@@ -20,7 +20,7 @@ ENV \
 
 # install packages
 RUN set -ex ;\
-    apt-get update && apt-get install -y --no-install-recommends \
+    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
           # install sdk
           # https://wiki.lineageos.org/devices/klte/build#install-the-build-packages
           android-sdk-platform-tools-common \
@@ -31,6 +31,9 @@ RUN set -ex ;\
           bc \
           bison \
           build-essential \
+          ccache \
+          curl \
+          ca-certificates \
           flex \
           g++-multilib \
           gcc-multilib \
@@ -41,12 +44,10 @@ RUN set -ex ;\
           lib32ncurses5-dev \
           lib32readline-dev \
           lib32z1-dev \
-          libesd0-dev \
           liblz4-tool \
           libncurses5-dev \
           libsdl1.2-dev \
           libssl-dev \
-          libwxgtk3.0-dev \
           libxml2 \
           libxml2-utils \
           lzop \
@@ -72,6 +73,7 @@ RUN set -ex ;\
           # we add these so we have a non-root user
           fakeroot \
 	      sudo \
+        openjdk-11-jdk-headless \
           ;\
     rm -rf /var/lib/apt/lists/*
 
@@ -100,6 +102,8 @@ COPY default.env init.sh /etc/profile.d/
 COPY lineageos /bin
 # copy dir with several PRed device configurations
 COPY device-config $DEVICE_CONFIGS_DIR
+
+RUN ln -s /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
 
 # set volume and user home folder
 USER $USER
